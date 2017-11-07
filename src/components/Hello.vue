@@ -63,13 +63,19 @@ export default {
     // }).catch(function (error) {
     //   console.log(error)
     // })
-    axios.get('https://quasar-project.firebaseio.com/user.json').then(function (response) {
-      this.users = response
-      console.log(response)
-      // Bus.$emit('UpdateUsers', { users: { response } })
-    }).catch(function (error) {
-      console.log(error)
+    var usersArray = []
+    axios.get('http://www.mocky.io/v2/59f0e26d310000a3270ea09a').then(function (response) {
+      return response.data
+    }).then(function (data) {
+      console.log(data)
+      for (let key in data) {
+        for (let username in data[key]) {
+          console.log(data[key][username])
+          usersArray.push(data[key][username])
+        }
+      }
     })
+    this.$store.state.users = usersArray
   },
   name: 'index',
   components: {
