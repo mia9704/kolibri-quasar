@@ -1,14 +1,19 @@
 <template>
   <q-layout>
-    <q-toolbar color="primary">
+    <q-toolbar>
       <q-toolbar-title>
-        User
+        Channel
       </q-toolbar-title>
     </q-toolbar>
     <h1 class=text-primary>
-      {{ $route.params.username }}
+      {{ channel['name'] }}
     </h1>
-    <q-btn round big color="primary" v-go-back=" '/users' "> 
+    <div class="row justify-center">
+      <h5 class=text-primary>
+        {{ channel['description'] }}
+      </h5>
+    </div>
+    <q-btn round big color="primary" v-go-back=" '/channels' "> 
       <q-icon name="arrow_back"></q-icon> 
     </q-btn>
   </q-layout>
@@ -28,12 +33,20 @@ import {
   QItemMain,
   GoBack
 } from 'quasar'
-import axios from 'axios'
-
 export default {
+  computed: {
+    channel () {
+      for (let key in this.$store.state.channels) {
+        let channel = this.$store.state.channels[key]
+        if (channel['root'] === this.$route.params.root) {
+          return channel
+        }
+      }
+    }
+  },
   data () {
     return {
-      users: []
+      channels: []
     }
   },
   props: [],
@@ -52,21 +65,6 @@ export default {
   },
   directives: {
     GoBack
-  },
-  created () {
-    var usersArray = []
-    axios.get('https://quasar-project.firebaseio.com/user.json').then(function (response) {
-      return response.data
-    }).then(function (data) {
-      for (let key in data) {
-        for (let initials in data[key]) {
-          for (let i in data[key][initials]) {
-            usersArray.push(data[key][initials][i])
-          }
-        }
-      }
-    })
-    this.users = usersArray
   }
 }
 </script>

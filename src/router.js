@@ -28,8 +28,10 @@ export default new VueRouter({
     { path: '/', component: load('Hello') },
     { path: '/time', component: load('Time') },
     { path: '/users', component: load('Users') },
+    { path: '/channels', component: load('Channels') },
     { path: '/users-data', UsersData: load('UsersData') },
     { path: '/users/:username', component: load('User') },
+    { path: '/channels/:root', component: load('Channel') },
 
     // Always leave this last one
     { path: '*', component: load('Error404') } // Not found
