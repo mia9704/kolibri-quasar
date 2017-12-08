@@ -10,14 +10,16 @@
     </q-toolbar>
     <q-list>
       <q-item highlight v-for="channel in channels"@click="$router.push('/channels/'+channel['root'])">
-        <q-card-media>
-          <q-parallax :src="channel['thumbnail']":height="150">
-          </q-parallax>
-          <q-card-separator />
-          <q-card-title>
-            <h5>{{channel['name']}}</h5>
-          </q-card-title>
-        </q-card-media>
+        <q-card inline style="width: 500px">
+          <q-card-media>
+            <q-parallax :src="channel['thumbnail']":height="150">
+            </q-parallax>
+            <q-card-separator />
+            <q-card-title>
+              <h5>{{channel['name']}}</h5>
+            </q-card-title>
+          </q-card-media>
+        </q-card>
       </q-item>
       <q-item-separator inset />
     </q-list>
@@ -88,6 +90,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-</style>
